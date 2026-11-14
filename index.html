@@ -69,58 +69,75 @@
 
     <h3>What we found</h3>
     <ul>
-      <li><strong>The choice shows up late, but it is made early.</strong> Averaged over the globe, the two futures differ by only 0.09&deg;C in 2021&ndash;2040. The gap grows to 0.64&deg;C in 2041&ndash;2060 and 2.83&deg;C in 2081&ndash;2100 (+1.2&deg;C versus +4.1&deg;C). The emissions paths split in 2015, so the late-century gap comes from decisions made decades earlier.</li>
-      <li><strong>The far north carries the most.</strong> North of the Arctic Circle the 2081&ndash;2100 gap is 2.2 times the global gap. Over land it is 1.6 times the gap over the ocean.</li>
-      <li><strong>Land sees it first.</strong> By 2041&ndash;2060 the gap is clear over 48% of the land but only 3% of the ocean. For the world as a whole it becomes clear in 2046&ndash;2065.</li>
-      <li><strong>Some places stay uncertain.</strong> South of Greenland, 3 of the 18 models get <em>less</em> warming on the high path, and the gap never becomes clear there by 2100. About 1% of the globe is like this.</li>
-      <li>San Diego's gap (+2.9&deg;C) is almost exactly the global average.</li>
+      <li><strong>The two futures look almost the same at first.</strong> Averaged over the globe, they are only 0.09&deg;C apart in 2021&ndash;2040. That grows to 0.64&deg;C in 2041&ndash;2060 and 2.83&deg;C in 2081&ndash;2100 (+1.2&deg;C on the low path versus +4.1&deg;C on the high one). The emissions paths split in 2015, so most of the late-century difference comes from choices made decades before it shows up.</li>
+      <li><strong>The Arctic has the biggest gap.</strong> North of the Arctic Circle, the 2081&ndash;2100 gap is 2.2 times the global one. The gap over land is also 1.6 times the gap over the ocean.</li>
+      <li><strong>Land shows the difference before the ocean does.</strong> By 2041&ndash;2060 the gap is clear over 48% of the land but only 3% of the ocean. For the global average it becomes clear in 2046&ndash;2065.</li>
+      <li><strong>A few places never get a clear answer.</strong> South of Greenland, 3 of the 18 models actually warm <em>less</em> on the high path, and the gap there does not become clear by 2100. About 1% of the globe is like this.</li>
+      <li>San Diego's gap (+2.9&deg;C) turned out to be almost the same as the global average.</li>
     </ul>
 
     <h3>Design decisions</h3>
     <h4>Visual encodings</h4>
     <ul>
-      <li><strong>Equal Earth projection.</strong> It keeps areas true, so the amount of dark red is honest. Mercator or a plain latitude&ndash;longitude grid would stretch the high latitudes, which is exactly where our biggest values are.</li>
-      <li><strong>One colour scale for all three temperature views.</strong> Low, high and gap share the same eight classes, so a colour always means the same number of degrees and switching views compares like with like. Within &plusmn;0.5&deg;C is a neutral grey for &ldquo;about no change&rdquo;, and blue is kept for cooling. We binned the colours rather than using a continuous ramp so values can be read off the legend, and so the class boundaries visibly move when the animation plays.</li>
-      <li><strong>A separate scale for &ldquo;When it shows&rdquo;.</strong> This view encodes time, not temperature, so it uses its own single-hue blue scale (darker means sooner) that cannot be mistaken for degrees.</li>
-      <li><strong>Smooth map, honest values.</strong> The 2.5&deg; grid is drawn pixel by pixel with bilinear interpolation. Tooltips use the same interpolation, so the number under the cursor always matches the colour.</li>
-      <li><strong>The line chart.</strong> High emissions is always orange and low emissions always blue. Each shaded band covers the middle 80% of models. The vertical axis is fixed, so a place with an 8&deg;C gap looks bigger than one with 3&deg;C. A vertical line marks when the place's gap becomes clear.</li>
+      <li><strong>Equal Earth projection.</strong> We wanted the amount of dark red on the map to match how much of the planet it covers, so we needed an equal-area projection. Mercator or a plain latitude&ndash;longitude grid would stretch the high latitudes, and that is where our biggest values are.</li>
+      <li><strong>One colour scale for the three temperature views.</strong> Low, high and gap all use the same eight classes, so a colour means the same number of degrees in every view and you can compare them by switching back and forth. Anything within &plusmn;0.5&deg;C is grey for &ldquo;about no change&rdquo;, and blue is only used for cooling. We used binned colours instead of a continuous ramp because they are easier to read off the legend, and because you can see the class boundaries move when the animation plays.</li>
+      <li><strong>A different scale for &ldquo;When it shows&rdquo;.</strong> This view shows time, not temperature, so we gave it its own single-hue blue scale (darker means sooner). That way it does not get confused with degrees.</li>
+      <li><strong>Smoothing.</strong> The data is on a 2.5&deg; grid, which looks blocky, so we draw it pixel by pixel with bilinear interpolation. The tooltip uses the same interpolation, so the number under the cursor matches the colour you see.</li>
+      <li><strong>The line chart.</strong> High emissions is always orange and low emissions is always blue. The shaded band around each line covers the middle 80% of models. We fixed the vertical axis so that a place with an 8&deg;C gap looks bigger than one with 3&deg;C. A vertical line marks the period when that place's gap becomes clear.</li>
     </ul>
     <h4>Interaction</h4>
     <ul>
-      <li><strong>Four views</strong> switch what the map measures: each future, the gap between them, and when the gap becomes clear.</li>
-      <li><strong>The slider and Play button</strong> move through 20-year periods. Animation is what shows the timing: the gap map stays almost grey until mid-century, then fills in from the north.</li>
-      <li><strong>Hover</strong> for exact values and the model range. <strong>Click</strong> to pin a place and chart it. The place buttons give a quick tour, including San Diego. Clicking the chart moves the map to that period, so the two views stay linked.</li>
-      <li><strong>Notes on the map</strong> are recalculated for every view and period. Each one hides itself when its claim stops being true, so the notes are never stale.</li>
+      <li><strong>Four views</strong> change what the map shows: each future on its own, the gap between them, and when the gap becomes clear.</li>
+      <li><strong>The slider and Play button</strong> step through the 20-year periods. The animation is the best way to see the timing. The gap map stays mostly grey until mid-century and then fills in starting from the north.</li>
+      <li><strong>Hover</strong> to get exact values and the model range. <strong>Click</strong> to pin a place and see its chart. The place buttons jump to a few locations we thought were interesting, including San Diego. Clicking on the chart also moves the map to that period, so the map and chart stay in sync.</li>
+      <li><strong>The notes on the map</strong> are recalculated for every view and period. A note is hidden when what it says is no longer true for the current view, so they do not go out of date.</li>
     </ul>
     <h4>Alternatives we considered</h4>
     <ul>
-      <li><strong>Three maps side by side.</strong> At web widths each would be too small to show 2.5&deg; detail, so we used one large map with a toggle.</li>
-      <li><strong>A blue&ndash;red scale centred on zero.</strong> Almost every value is warming, so half of the colours would go unused.</li>
-      <li><strong>One frame per year.</strong> Every frame is already a 20-year average, so yearly frames would add five times the data with no visible difference.</li>
-      <li><strong>A line for every model.</strong> Eighteen overlapping lines per future were unreadable, so we kept the band.</li>
+      <li><strong>Three maps side by side.</strong> At normal web widths each map would be too small to see the 2.5&deg; detail, so we went with one big map and a toggle.</li>
+      <li><strong>A blue&ndash;red scale centred on zero.</strong> Almost every value is warming, so half of the colours would have gone unused.</li>
+      <li><strong>One frame per year.</strong> Every frame is already a 20-year average, so yearly frames would be five times the data and look basically the same.</li>
+      <li><strong>A line for every model.</strong> We tried this, but eighteen overlapping lines per future were unreadable, so we kept the band.</li>
     </ul>
 
     <h3>Data and transformations</h3>
     <ol>
-      <li><strong>Source.</strong> Monthly near-surface air temperature (<code>tas</code>) from the <a href="https://console.cloud.google.com/marketplace/product/noaa-public/cmip6">CMIP6 archive on Google Cloud</a>, for the historical runs and the SSP1-2.6 and SSP5-8.5 scenarios.</li>
-      <li><strong>Models.</strong> One model per institution, so no modelling centre counts twice, and one run per model that exists in all three experiments. That gives 18 models: <span id="model-list"></span>.</li>
-      <li><strong>Annual means</strong>, weighting each month by its length.</li>
-      <li><strong>A common grid.</strong> Every model is interpolated to 2.5&deg; (144 by 72 cells). We checked each model's global average on this grid against its native grid; they agree to within 0.012&deg;C.</li>
-      <li><strong>Warming.</strong> Each model is compared with its own 1995&ndash;2014 average, which removes differences in each model's starting climate.</li>
-      <li><strong>20-year averages</strong>, every 5 years. The period labelled 2081&ndash;2100 averages exactly those years, so 2021&ndash;2040, 2041&ndash;2060 and 2081&ndash;2100 match the periods the IPCC uses.</li>
-      <li><strong>Ensemble.</strong> The map shows the plain average of the models. Bands and tooltip ranges are the 10th to 90th percentile across models.</li>
-      <li><strong>The gap</strong> is high minus low, worked out inside each model before averaging, so its range reflects disagreement about the gap itself.</li>
-      <li><strong>&ldquo;Clear&rdquo;</strong> means the 10th percentile of the gap is above 0.5&deg;C (so 9 in 10 models agree it is at least that big) and stays above it in every later period. We chose 0.5&deg;C because it is the step between the 1.5&deg;C and 2&deg;C Paris targets.</li>
+      <li><strong>Source.</strong> Monthly near-surface air temperature (<code>tas</code>) from the <a href="https://console.cloud.google.com/marketplace/product/noaa-public/cmip6">CMIP6 archive on Google Cloud</a>. We used the historical runs plus the SSP1-2.6 and SSP5-8.5 scenarios.</li>
+      <li><strong>Models.</strong> We took one model per institution so that no modelling centre gets counted twice, and one run per model that is available in all three experiments. That left us with 18 models: <span id="model-list"></span>.</li>
+      <li><strong>Annual means.</strong> We averaged the months into years, weighting each month by its number of days.</li>
+      <li><strong>A common grid.</strong> The models all use different grids, so we interpolated each one to 2.5&deg; (144 by 72 cells). To check this, we compared each model's global average on the new grid with its original grid, and they agree to within 0.012&deg;C.</li>
+      <li><strong>Warming.</strong> Each model is compared with its own 1995&ndash;2014 average. This takes out the differences in where each model's climate starts.</li>
+      <li><strong>20-year averages</strong>, stepped every 5 years. The period labelled 2081&ndash;2100 is the average of exactly those years, so 2021&ndash;2040, 2041&ndash;2060 and 2081&ndash;2100 line up with the periods the IPCC uses.</li>
+      <li><strong>Ensemble.</strong> The map shows the simple average of the 18 models. The bands and tooltip ranges are the 10th to 90th percentile across models.</li>
+      <li><strong>The gap</strong> is high minus low. We calculate it inside each model first and then average, so the range shows how much the models disagree about the gap itself.</li>
+      <li><strong>&ldquo;Clear&rdquo;</strong> means the 10th percentile of the gap is above 0.5&deg;C (so 9 out of 10 models agree it is at least that big) and it stays above that in every later period. We picked 0.5&deg;C because it is the difference between the 1.5&deg;C and 2&deg;C Paris targets.</li>
     </ol>
-    <p><strong>Caveats.</strong> These are raw model averages. The set includes some high-sensitivity models, so it runs warmer than the IPCC's assessed ranges, which also draw on other evidence. The bands show how far the models spread, not a probability. The code that prepares the data is in <a href="https://github.com/chewythechoochoo/portfolio/tree/main/project3/pipeline">project3/pipeline</a>.</p>
+    <p><strong>Caveats.</strong> These are raw model averages. Our set includes some high-sensitivity models, so it runs warmer than the IPCC's assessed ranges, which also use other lines of evidence. The bands show how spread out the models are and should not be read as probabilities. The code that prepares the data is in <a href="https://github.com/chewythechoochoo/portfolio/tree/main/project3/pipeline">project3/pipeline</a>.</p>
 
     <h3>Development process</h3>
-    <p><strong>Team and roles:</strong> <mark class="fill-in">[Fill in: each team member and what they worked on]</mark></p>
-    <p><strong>Time:</strong> <mark class="fill-in">[Fill in: about how many total people-hours]</mark></p>
-    <p><strong>What took the most time.</strong> Preparing the data took the longest. Downloading the 54 model runs was quick, but checking them was not. Three runs stored their 20-year files out of time order and had to be sorted. Comparing every model's global average before and after regridding showed that one model (FGOALS-g3) uses unevenly spaced latitudes, which a simple area weighting gets wrong. Next came the map renderer: drawing the grid pixel by pixel through the projection, and fixing a bug where D3 wraps longitudes, which painted colour outside the globe. Testing the finished page turned up smaller problems, such as a legend that collapsed and a tooltip that went stale while the animation played.</p>
+    <h4>Chu</h4>
+    <ul>
+      <li>Brainstormed the chart idea and research question</li>
+      <li>Created the HTML website</li>
+      <li>Led the D3 implementation and the visual encodings</li>
+      <li>Implemented the interactions that show our key points</li>
+    </ul>
+    <h4>Sam</h4>
+    <ul>
+      <li>Wrote up the data transformations, design decisions, interaction, alternatives, and findings</li>
+      <li>Organized the page layout and wrote the writeup</li>
+    </ul>
+    <h4>William</h4>
+    <ul>
+      <li>Cleaned the data and corrected the filtering and aggregation</li>
+      <li>Made sure the transformations fit what we were trying to show</li>
+      <li>Tested each interactive feature to make sure everything goes smooth</li>
+    </ul>
+    <p><strong>Time:</strong> ~30 hours</p>
+    <p><strong>What took the most time.</strong> Preparing the data took the longest. Downloading the 54 model runs was quick, but checking them was not. Three of the runs had their 20-year files stored out of time order, so we had to sort them. When we compared every model's global average before and after regridding, we also found that one model (FGOALS-g3) has unevenly spaced latitudes, which a simple area weighting gets wrong. After that, the map renderer took the most work. We had to draw the grid pixel by pixel through the projection, and we hit a bug where D3 wraps longitudes and paints colour outside the globe. Testing the finished page turned up some smaller problems too, like a legend that collapsed and a tooltip that showed old values while the animation was playing.</p>
 
     <h3>Tools and sources</h3>
-    <p>All plotting uses <a href="https://d3js.org/">D3</a> v7.9.0. <a href="https://github.com/topojson/topojson-client">topojson-client</a> only decodes the outlines, which come from <a href="https://www.naturalearthdata.com/">Natural Earth</a> through <a href="https://github.com/topojson/world-atlas">world-atlas</a>. The data was prepared in Python with xarray, zarr and gcsfs.</p>
+    <p>All of the plotting is done with <a href="https://d3js.org/">D3</a> v7.9.0. We only use <a href="https://github.com/topojson/topojson-client">topojson-client</a> to decode the country outlines, which come from <a href="https://www.naturalearthdata.com/">Natural Earth</a> through <a href="https://github.com/topojson/world-atlas">world-atlas</a>. The data was prepared in Python with xarray, zarr and gcsfs.</p>
   </article>
 </main>
 <div id="tooltip" class="tooltip" hidden></div>
