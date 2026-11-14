@@ -25,5 +25,3 @@ Then open http://localhost:8000.
 | `lib/` | D3 v7.9.0 and topojson-client 3.1.0. |
 | `pipeline/` | Python scripts that build `data/` from the raw CMIP6 archive. |
 
-The write-up is at the bottom of the page.
-# DSC-106-Project-3
